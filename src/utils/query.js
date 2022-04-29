@@ -6,9 +6,9 @@
 
 
      filter(){
-         const queryTo = {...queryString}
-         const exclude =['sort', 'page', 'limit', 'fields']
-          exclude.forEach((el)=> queryTo[el] )
+         const queryTo = {...this.queryString}
+         const excludedFields =['sort', 'page', 'limit', 'fields']
+          excludedFields.forEach((el)=>  delete queryTo[el] )
 
          let queryStr = JSON.stringify(queryTo)
          queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match)=> `$${match}`)
@@ -19,16 +19,18 @@
 
      sort(){
 if(this.queryString.sort){
-    const sortBy = this.queryString.split(',').join(' ')
+    const sortBy = this.queryString.sort.split(',').join(' ')
 
     this.query = this.query.sort(sortBy)
-    return this
+    
 
 }
 else{
-return this.query
+return this.query.sort("-createdAt")
 }
-     }
+   
+return this
+}
 
      
  limit(){

@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const nftSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-
+  name: String,
+  
   username: {
     type: String,
     unique: true,
@@ -16,7 +14,7 @@ const nftSchema = new mongoose.Schema({
   following: {
     type: Number,
   },
-bio:String,
+  bio: String,
   banner_image: {
     type: String,
   },
@@ -42,21 +40,12 @@ bio:String,
   offers_received: {
     type: Number,
   },
-  collections: 
-   [
-      { type: mongoose.Schema.Types.ObjectId,
-       ref: 'NftCollection'}
-],
-  created:   [
-   { type: mongoose.Schema.Types.ObjectId,
-    ref: "NftCollection"}
-],
-collected:[
-{type: mongoose.Schema.Types.ObjectId,
-ref: "NftCollection"}
-],
-  verified: {
+  collections: [{ type: mongoose.Schema.Types.ObjectId, ref: "NftCollection" }],
+  created: [{ type: mongoose.Schema.Types.ObjectId, ref: "NftCollection" }],
+  collected: [{ type: mongoose.Schema.Types.ObjectId, ref: "NftCollection" }],
+  isVerified: {
     type: Boolean,
+    default:false
   },
 });
 const NFT = mongoose.model("NFT", nftSchema);
