@@ -8,11 +8,15 @@
      filter(){
          const queryTo = {...this.queryString}
          const excludedFields =['sort', 'page', 'limit', 'fields']
+
+         
           excludedFields.forEach((el)=>  delete queryTo[el] )
 
          let queryStr = JSON.stringify(queryTo)
          queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match)=> `$${match}`)
+        
          this.query = this.query.find(JSON.parse(queryStr))
+         console.log(this)
          return this
 
      }

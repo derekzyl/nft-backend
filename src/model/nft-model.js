@@ -1,52 +1,62 @@
 const mongoose = require("mongoose");
-const nftSchema = new mongoose.Schema({
-  name: String,
-  
-  username: {
-    type: String,
-    unique: true,
-  },
+const NFT = require("./user-model");
 
-  followers: {
-    type: Number,
-  },
+const NftCollectionSchema = new mongoose.Schema({
 
-  following: {
-    type: Number,
-  },
-  bio: String,
-  banner_image: {
+    name: String,
+  assets: {
     type: String,
   },
-  profile_image: {
-    type: String,
-  },
-  facebook: {
-    type: String,
-  },
-
-  instagram: {
-    type: String,
-  },
-  twitter: {
-    type: String,
-  },
-  invited_by: {
-    type: String,
-  },
-  offers_made: {
-    type: Number,
-  },
-  offers_received: {
-    type: Number,
-  },
-  collections: [{ type: mongoose.Schema.Types.ObjectId, ref: "NftCollection" }],
-  created: [{ type: mongoose.Schema.Types.ObjectId, ref: "NftCollection" }],
-  collected: [{ type: mongoose.Schema.Types.ObjectId, ref: "NftCollection" }],
-  isVerified: {
+  asset_id: Number,
+  price_in_USD: Number,
+  price_in_BNB: Number,
+  collectionName:String,
+  owner: String,
+  creator:String,
+  walletId:String,
+  owner: String,
+  isCollected: {
     type: Boolean,
-    default:false
+    default: false,
   },
+  isCreated: {
+    type: Boolean,
+    default: false,
+  },
+
+  ipfs: String,
+  bscSan: String,
+  history: [
+    {
+      minted: 
+        {
+          username: String,
+          date: Date,
+        },
+      
+      listed: [
+        {
+          date: Date,
+          price_in_BNB: Number,
+          price_in_USD: Number,
+          username: String,
+        },
+      ],
+      transferred: [
+        {
+          date: Date,
+          price_in_BNB: Number,
+          price_in_USD: Number,
+          username: String,
+        },
+      ],
+    },
+  ],
+
+
+
 });
-const NFT = mongoose.model("NFT", nftSchema);
-module.exports = NFT;
+
+const NftCollection = mongoose.model("NftCollection", NftCollectionSchema);
+
+module.exports = NftCollection;

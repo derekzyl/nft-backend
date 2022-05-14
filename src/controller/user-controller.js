@@ -1,4 +1,4 @@
-const NFT = require("../model/nft-model");
+const NFT = require("../model/user-model");
 const Query = require("../utils/query");
 
 /**
@@ -8,23 +8,72 @@ const Query = require("../utils/query");
  *  this fetches all the users that are registered on the platform
  */
 exports.getNft = async (req, res) => {
-    console.log(`${await NFT.find()}`)
+
+
+
   try {
-    console.log("i got to nft as of now  👌  get");
+  const queryObj = {...req.query}
+  const excludedFields =['sort', 'page', 'limit', 'fields']
 
-    const theNft = new Query(NFT.find().populate("NFTCollection"), req.query)
-      .filter()
-      .limit()
-      .paginate()
-      .sort();
+         
+  excludedFields.forEach((el)=>  delete queryObj[el] )
 
-    const nftUser = await theNft;
+ let queryStr = JSON.stringify(queryObj)
+ queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match)=> `$${match}`)
+ let  nft  =  NFT.find(JSON.parse(queryStr))
+
+
+if (req.query.sort){
+  const sortBy = req.query.sort.split(',').join(' ')
+
+  nft=nft.sort(sortBy)
+}
+
+
+if(req.query.limit){
+
+    const limit = parseInt(req.query.limit)
+    nft= nft.limit(limit)
+   
+}
+else{   nft.limit(16)}
+
+
+if(req.query.fields){
+
+  const fields = req.query.sort.split(',').join(' ')
+  nft= nft.select(fields)
+ 
+}
+else{   nft.select('-_V')}
+
+
+
+const page = req.query.page * 1 || 1
+const limit = req.query.limit * 1 || 16
+const skip = (page - 1) * limit
+nft = nft.skip(skip).limit(limit)
+ 
+
+    // console.log(`${await NFT.find()}`)
+  
+   
+
+    // const theNft = new Query(NFT.find(),  req.query)
+     
+    //   .limit()
+    //   .paginate()
+    //   .sort();
+    
+    // const nft = await theNft.query;
+    const nfts = await nft
+    console.log(nfts, "of nft")
 
     res.status(200).json({
       success: true,
       message: "successfully fetched all the users 😎",
       data: {
-        nftUser: nftUser,
+        nfts
       },
     });
   } catch (err) {
@@ -37,9 +86,10 @@ exports.getNft = async (req, res) => {
 
 exports.getSingleNft = async (req, res) => {
   const { username } = req.params;
+  console.log(username)
 
   try {
-    const oneUser = await NFT.findOne(username);
+    const oneUser = await NFT.findOne({username});
     if (oneUser) {
       res.status(200).json({
         success: true,
@@ -62,10 +112,10 @@ exports.postNft = async (req, res) => {
     const nft = await NFT.create(body);
     if (nft) {
       return res.status(200).json({
-        message: "successfully created",
+        message: "user successfully created",
         nft: nft,
       });
-    } else throw new Error("nft wasnt created");
+    } else throw new Error("user wasnt created");
   } catch (err) {
     return res.status(400).json({
       error: err,

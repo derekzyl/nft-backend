@@ -1,17 +1,22 @@
 const express = require("express");
 
 const collectionRouter = express.Router();
-const collectionController = require("../controller/collections-controllers");
+const collectionController = require("../controller/nft-controllers");
 
 collectionRouter
   .route("/")
   .get(collectionController.getCollections)
   .post(collectionController.postCollections);
 
+
+
+
+  
 collectionRouter
-  .route("/:id")
+  .route("/:username")
   .get(collectionController.getSingleCollection)
   .patch(collectionController.updateCollections);
+
 
   
   module.exports = collectionRouter;

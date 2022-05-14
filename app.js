@@ -5,20 +5,23 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
-const collectionRouter = require("./src/routes/creators-collectors");
-const nftUsers = require("./src/routes/nft-route");
+const collectionRouter = require("./src/routes/nfts-route");
+const nftUsers = require("./src/routes/users-route");
+const routerCollection = require("./src/routes/collection-route");
 const app = express();
 
 
 app.use(express.json())
-// app.use('/',(req,res,next)=>{
-//    res.status(200).json({
-//        message: 'Welcome to the NFT API'
-//    })
-//    next()
+// app.use( (req,res)=>{
+//     const [walleID, nftID] = req.url.split("/").slice(2)
+//     console.log(walleID, nftID)
 // })
-app.use("/nft", nftUsers);
-app.use("/collection", collectionRouter);
+
+app.use("/users", nftUsers);
+app.use("/nft", collectionRouter);
+app.use('/collection', routerCollection )
+
+
 app.use(morgan("dev"));
 
 app.all('*', (req, res, next)=>{
