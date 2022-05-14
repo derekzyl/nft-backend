@@ -13,7 +13,7 @@ collectionRouter
 
   
 collectionRouter
-  .route("/:username")
+  .route("/:asset_id")
   .get(collectionController.getSingleCollection)
   .patch(collectionController.updateCollections);
 

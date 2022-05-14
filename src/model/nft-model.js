@@ -4,38 +4,51 @@ const NFT = require("./user-model");
 const NftCollectionSchema = new mongoose.Schema({
 
     name: String,
-  assets: {
-    type: String,
-  },
+
+ 
   asset_id: Number,
   price_in_USD: Number,
   price_in_BNB: Number,
-  collectionName:String,
+  collection_name:String,
+
   owner: String,
+
   creator:String,
-  walletId:String,
-  owner: String,
+  isImage:{
+    type:Boolean,
+    default: false,
+  },
+  creator_image:String,
+  owner_image:String,
+
   isCollected: {
     type: Boolean,
     default: false,
+    
   },
   isCreated: {
     type: Boolean,
     default: false,
   },
+  isBid:{
+    type: Boolean,
+    default: false,
+  },
 
   ipfs: String,
-  bscSan: String,
+  bsScan: String,
   history: [
     {
       minted: 
         {
+          history_image:String,
           username: String,
           date: Date,
         },
       
       listed: [
         {
+          history_image:String,
           date: Date,
           price_in_BNB: Number,
           price_in_USD: Number,
@@ -44,6 +57,7 @@ const NftCollectionSchema = new mongoose.Schema({
       ],
       transferred: [
         {
+          history_image:String,
           date: Date,
           price_in_BNB: Number,
           price_in_USD: Number,

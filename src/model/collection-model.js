@@ -4,16 +4,33 @@ const { default: mongoose } = require("mongoose");
 
 
  const CollectionModel = new mongoose.Schema({
-    collectionName:String,
-    itemNumber: Number,
+    collection_name:{
+        type:String,
+    
+    },
+
+
+
+
+    collection_id:{
+        type:String,
+        unique:true,
+    },
+    item_number: Number,
+
     owners:Number,
-    volumeTraded: Number,
-    floorPrice:Number,
-    owner:String,
-    createdBy: String,
+
+    volume_traded: Number,
+    floor_price:Number,
+
+    creator:String,
+
+    created_by: String,
     description: String,
     discord: String,
-    instagram:String
+    instagram:String,
+    website:String,  
+    facebook:String,
  })
 
  const CollectionData = mongoose.model('CollectionData', CollectionModel )

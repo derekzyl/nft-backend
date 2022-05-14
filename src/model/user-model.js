@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const nftSchema = new mongoose.Schema({
+
   name: String,
   
   username: {
@@ -10,14 +11,16 @@ const nftSchema = new mongoose.Schema({
   followers: {
     type: Number,
   },
-  walletId:{
+  wallet_id:{
     type: String
   },
+
+bio:String,
 
   following: {
     type: Number,
   },
-  bio: String,
+ 
   banner_image: {
     type: String,
   },

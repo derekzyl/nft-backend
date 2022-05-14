@@ -41,7 +41,7 @@ else{   nft.limit(16)}
 
 if(req.query.fields){
 
-  const fields = req.query.sort.split(',').join(' ')
+  const fields = req.query.fields.split(',').join(' ')
   nft= nft.select(fields)
  
 }
@@ -124,9 +124,9 @@ exports.postNft = async (req, res) => {
 };
 exports.updateNft = async (req, res) => {
   const { body } = req.body;
-  const { id } = req.params;
+  const { username } = req.params;
   try {
-    const nft = await NFT.findByIdAndUpdate(id, body, {
+    const nft = await NFT.findUpdate(username, body, {
       new: true,
       runValidators: true,
     });
