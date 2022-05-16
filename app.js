@@ -4,11 +4,13 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
+const cors = require('cors')
 
 const collectionRouter = require("./src/routes/nfts-route");
 const nftUsers = require("./src/routes/users-route");
 const routerCollection = require("./src/routes/collection-route");
 const app = express();
+app.use(cors())
 
 
 app.use(express.json())
