@@ -96,9 +96,9 @@ exports.getCollections = async (req, res) => {
  */
 exports.getSingleCollection = async (req, res, next) => {
  
-  const { asset_id } = req.params;
+  const { id } = req.params;
   try {
-    const singleCollection = await NftCollection.find(asset_id)
+    const singleCollection = await NftCollection.find(id)
     if (singleCollection) {
       return res.status(200).json({
         success: true,
