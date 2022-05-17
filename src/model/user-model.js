@@ -14,7 +14,7 @@ const nftSchema = new mongoose.Schema({
   wallet_id:{
     type: String
   },
-
+creations: Number,
 bio:String,
 
   following: {
