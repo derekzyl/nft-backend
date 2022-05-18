@@ -46,9 +46,9 @@ bio:String,
   offers_received: {
     type: Number,
   },
-  Collections:Number,
-  Created:Number,
-  Collected:Number,
+  collections:Number,
+  created:Number,
+  collected:Number,
   isVerified: {
     type: Boolean,
     default:false
