@@ -6,7 +6,11 @@ const NftCollectionSchema = new mongoose.Schema({
     name: String,
 
  
-  nft_image: String,
+  nft_image: {
+    type: String,
+    unique:true
+    
+  },
   price_in_USD: Number,
   price_in_BNB: Number,
   collection_name:String,

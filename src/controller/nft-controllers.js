@@ -35,7 +35,7 @@ exports.getCollections = async (req, res) => {
       nft= nft.limit(limit)
      
   }
-  else{   nft.limit(16)}
+  else{   nft.limit(1000)}
   
   
   if(req.query.fields){
@@ -48,10 +48,11 @@ exports.getCollections = async (req, res) => {
   
   
   
-  const page = req.query.page * 1 || 1
-  const limit = req.query.limit * 1 || 16
+if(req.query.page)
+{  const page = req.query.page *  1
+  const limit = req.query.limit * 1 
   const skip = (page - 1) * limit
-  nft = nft.skip(skip).limit(limit)
+  nft = nft.skip(skip).limit(limit)}
    
   
       // console.log(`${await NFT.find()}`)
