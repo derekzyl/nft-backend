@@ -125,6 +125,7 @@ exports.postCollections = async (req, res) => {
   console.log(body);
   try {
     const collection = await NftCollection.create(body);
+    const user
     if (collection) {
       return res.status(200).json({
         message: "nft successfully created",

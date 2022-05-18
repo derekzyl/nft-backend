@@ -41,6 +41,7 @@ const NftCollectionSchema = new mongoose.Schema({
 
   ipfs: String,
   bsScan: String,
+  description: String,
   history: [
     {
       minted: 
