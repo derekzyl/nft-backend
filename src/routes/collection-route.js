@@ -13,7 +13,7 @@ routerCollection
 
   
   routerCollection
-  .route("/:created_by")
+  .route("/:collection_id")
   .get(collectionControl.getSingleCollection)
   .patch(collectionControl.updateCollections);
   
