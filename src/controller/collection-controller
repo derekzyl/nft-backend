@@ -96,9 +96,9 @@ exports.getCollections = async (req, res) => {
  */
 exports.getSingleCollection = async (req, res, next) => {
  
-  const { owner } = req.params;
+  const { created_by } = req.params;
   try {
-    const singleCollection = await  CollectionData.find(owner)
+    const singleCollection = await  CollectionData.find(created_by)
     if (singleCollection) {
       return res.status(200).json({
         success: true,

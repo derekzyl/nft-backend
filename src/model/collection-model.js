@@ -8,10 +8,6 @@ const { default: mongoose } = require("mongoose");
         type:String,
     
     },
-
-
-
-
     collection_id:{
         type:String,
         unique:true,
@@ -23,9 +19,12 @@ const { default: mongoose } = require("mongoose");
     volume_traded: Number,
     floor_price:Number,
 
-    creator:String,
+    creator_image:String,
+    created_by:String,
+    collection_banner:String,
+    creator_name:String,
 
-    created_by: String,
+    
     description: String,
     discord: String,
     instagram:String,
