@@ -19,7 +19,7 @@ const { default: mongoose } = require("mongoose");
     volume_traded: Number,
     floor_price:Number,
 
-    creator_image:String,
+    collection_image:String,
     created_by:String,
     collection_banner:String,
     creator_name:String,
