@@ -9,6 +9,7 @@ const cors = require('cors')
 const collectionRouter = require("./src/routes/nfts-route");
 const nftUsers = require("./src/routes/users-route");
 const routerCollection = require("./src/routes/collection-route");
+const searchRouter = require("./src/routes/search-route");
 const app = express();
 app.use(cors())
 
@@ -22,7 +23,7 @@ app.use(express.json())
 app.use("/users", nftUsers);
 app.use("/nft", collectionRouter);
 app.use('/collection', routerCollection )
-
+app.use('/search', searchRouter)
 
 app.use(morgan("dev"));
 

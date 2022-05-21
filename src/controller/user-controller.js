@@ -9,8 +9,6 @@ const Query = require("../utils/query");
  */
 exports.getNft = async (req, res) => {
 
-
-
   try {
   const queryObj = {...req.query}
   const excludedFields =['sort', 'page', 'limit', 'fields']

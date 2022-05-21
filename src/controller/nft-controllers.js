@@ -1,5 +1,10 @@
+const NFT = require("../model/user-model");
+const CollectionData = require("../model/collection-model");
 const NftCollection = require("../model/nft-model");
+
 const Query = require("../utils/query");
+
+
 
 /**
  *
@@ -9,7 +14,7 @@ const Query = require("../utils/query");
  */
 
 exports.getCollections = async (req, res) => {
-  console.log("i got to collection as of now get");
+  // console.log("i got to collection as of now get");
   try {
     const queryObj = {...req.query}
     const excludedFields =['sort', 'page', 'limit', 'fields']
@@ -20,11 +25,10 @@ exports.getCollections = async (req, res) => {
    let queryStr = JSON.stringify(queryObj)
    queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match)=> `$${match}`)
    let  nft  =  NftCollection.find(JSON.parse(queryStr))
-  
-  
-  if (req.query.sort){
-    const sortBy = req.query.sort.split(',').join(' ')
-  
+   
+   if (req.query.sort){
+     
+     const sortBy = req.query.sort.split(',').join(' ')
     nft=nft.sort(sortBy)
   }
   
@@ -48,16 +52,14 @@ exports.getCollections = async (req, res) => {
   
   
   
+
+
 if(req.query.page)
 {  const page = req.query.page *  1
   const limit = req.query.limit * 1 
   const skip = (page - 1) * limit
   nft = nft.skip(skip).limit(limit)}
    
-  
-      // console.log(`${await NFT.find()}`)
-    
-     
   
       // const theNft = new Query(NFT.find(),  req.query)
        
@@ -67,7 +69,7 @@ if(req.query.page)
       
       // const nft = await theNft.query;
       const nfts = await nft
-      console.log(nfts, "of nft")
+      // console.log(nfts, "of nft")
   
       res.status(200).json({
         success: true,
@@ -122,7 +124,7 @@ exports.getSingleCollection = async (req, res, next) => {
  */
 exports.postCollections = async (req, res) => {
   const { body } = req;
-  console.log(body);
+  // console.log(body);
   try {
     const collection = await NftCollection.create(body);
   
